@@ -4,9 +4,14 @@ class ContentsController < ApplicationController
     def index
       @contents = current_user.contents
     end
-    
+
     def new
       @content = Content.new 
+    end
+
+    def show 
+      @content = Content.find(params[:id])
+
     end
 
     def create
@@ -15,6 +20,19 @@ class ContentsController < ApplicationController
         redirect_to contents_path notice: 'Content successfully created!!'
       else
         render :new 
+      end
+    end
+
+    def edit
+      @content = Content.find(params[:id])
+    end
+    
+    def update
+      @content = Content.find(params[:id])
+      if @content.update(content_params) 
+        redirect_to contents_path notice: 'Content successfully updated!!'
+      else
+        render :edit 
       end
     end
 
