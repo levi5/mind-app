@@ -15,6 +15,7 @@ class ContentsController < ApplicationController
     end
 
     def show 
+      @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     end
 
     def create
